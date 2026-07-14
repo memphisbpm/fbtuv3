@@ -18,7 +18,8 @@
   --H:                'Montserrat', sans-serif;
   --B:                'Inter', sans-serif;
   --nh:               64px;  /* nav bar height */
-  --nh-total:         64px;  /* single bar */
+  --nh-top:           36px;  /* top bar height */
+  --nh-total:         100px; /* combined height */
   --r:                10px; /* Radius standard premium */
   
   /* SOMBRAS SOFT */
@@ -62,10 +63,58 @@ h2.ttl.w em{color:rgba(255,255,255,.4)}
    STANFORD-STYLE MEGA MENU NAV
 ═══════════════════════════════════════════ */
 
-/* ── MAIN NAV BAR (white bar with crimson right zone) ── */
+/* ── TOP BAR (crimson strip) ── */
+#nav-top {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 1001;
+  height: var(--nh-top);
+  background: var(--red2);
+  display: flex;
+  align-items: center;
+  padding: 0 36px;
+}
+.nt-wrap {
+  width: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.nt-left {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.nt-right {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-left: auto;
+}
+#nav-top a {
+  font-family: var(--B);
+  font-size: 11.5px;
+  font-weight: 600;
+  color: rgba(255,255,255,.8);
+  padding: 4px 10px;
+  border-radius: 3px;
+  transition: color .2s;
+  white-space: nowrap;
+}
+#nav-top a:hover {
+  color: #fff;
+}
+#nav-top .sep {
+  color: rgba(255,255,255,.3);
+  font-size: 11px;
+}
+
+/* ── MAIN NAV BAR (white bar) ── */
 #nav {
   position: fixed;
-  top: 0;
+  top: var(--nh-top);
   left: 0; right: 0;
   z-index: 1000;
   height: var(--nh);
@@ -129,7 +178,8 @@ h2.ttl.w em{color:rgba(255,255,255,.4)}
 }
 .nk:hover,
 .nk.on,
-.ni:hover .nk {
+.ni:hover .nk,
+.ni.open .nk {
   color: var(--red);
   border-bottom-color: var(--red);
 }
@@ -142,6 +192,7 @@ h2.ttl.w em{color:rgba(255,255,255,.4)}
   flex-shrink: 0;
   margin-left: auto;
   padding-left: 16px;
+  margin-right: 56px; /* leave space for the USA flag ribbon */
 }
 
 /* Portal link */
@@ -157,6 +208,18 @@ h2.ttl.w em{color:rgba(255,255,255,.4)}
   background: transparent;
 }
 .np:hover { color: var(--navy); border-color: var(--navy); background: var(--g); }
+
+/* USA Flag Ribbon style */
+.nav-flag {
+  position: absolute;
+  right: 28px;
+  top: 0; /* aligned with the top of the main white navbar */
+  height: 78px; /* hangs slightly below navbar */
+  width: auto;
+  z-index: 1010;
+  pointer-events: none;
+  filter: drop-shadow(0 3px 6px rgba(0,0,0,0.18));
+}
 
 /* ══ MEGA DROPDOWN ══ smooth slide-in + logo watermark ══ */
 .dd {
@@ -200,8 +263,8 @@ h2.ttl.w em{color:rgba(255,255,255,.4)}
 }
 .dd::before { display: none; }
 
-/* Visible state on hover */
-.ni:hover .dd {
+/* Visible state on click class .open */
+.ni.open .dd {
   opacity: 1;
   visibility: visible;
   transform: translateY(0);
@@ -279,6 +342,33 @@ h2.ttl.w em{color:rgba(255,255,255,.4)}
   margin-bottom: 8px;
   padding-bottom: 6px;
   border-bottom: 1px solid rgba(255,255,255,.15);
+  /* Toggle visual styling */
+  cursor: pointer;
+  position: relative;
+  padding-right: 18px;
+  user-select: none;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: color 0.2s;
+}
+.dd-col-title:hover {
+  color: #fff;
+}
+.dd-col-title::after {
+  content: '+';
+  font-family: var(--B);
+  font-size: 13px;
+  font-weight: 300;
+  position: absolute;
+  right: 2px;
+  transition: transform 0.25s ease;
+  color: rgba(255,255,255,.6);
+}
+.dd-col.open .dd-col-title::after {
+  content: '−'; /* minus character */
+  transform: rotate(180deg);
+  color: #fff;
 }
 .dd a {
   display: block;
@@ -286,12 +376,24 @@ h2.ttl.w em{color:rgba(255,255,255,.4)}
   font-size: 14px;
   font-weight: 400;
   color: rgba(255,255,255,.88);
-  padding: 7px 0;
   border-radius: 0;
-  transition: color .15s, padding-left .2s cubic-bezier(0.25,0.8,0.25,1);
   white-space: nowrap;
   border-bottom: none;
   background: none;
+  /* Accordion collapse/expand transition */
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+  padding: 0;
+  margin: 0;
+  pointer-events: none;
+  transition: color .15s, padding-left .2s cubic-bezier(0.25,0.8,0.25,1), max-height 0.25s ease, opacity 0.2s ease, margin 0.2s ease, padding 0.2s ease;
+}
+.dd-col.open a {
+  max-height: 48px; /* allow links to expand */
+  opacity: 1;
+  padding: 7px 0;
+  pointer-events: auto;
 }
 .dd a:hover {
   color: #fff;
@@ -3116,6 +3218,15 @@ footer{background:var(--navy2);padding:56px 60px 0}
 
 /* Tablet/Mobile: collapse to hamburger */
 @media (max-width: 900px) {
+  /* Hide top bar on mobile */
+  #nav-top { display: none; }
+  
+  /* Reset main nav top position */
+  #nav { top: 0; padding: 0 18px; }
+  
+  /* Adjust body padding to nav height only */
+  body { padding-top: var(--nh); }
+
   /* Hide desktop nav links */
   .nm { display: none; }
   .nr { display: none; }
@@ -3123,12 +3234,18 @@ footer{background:var(--navy2);padding:56px 60px 0}
   /* Show hamburger — styled for white nav bar */
   .hb { display: flex; }
   .hb span { background: var(--t); }
-  #nav { padding: 0 18px; }
+
+  /* Reposition flag on mobile */
+  .nav-flag {
+    top: 0;
+    height: 80px;
+    right: 54px; /* positioned left of the hamburger */
+  }
 
   /* Mega menu on mobile: fallback to full screen scroll */
   .dd {
     position: fixed;
-    top: var(--nh-total);
+    top: var(--nh);
     left: 0; right: 0; bottom: 0;
     overflow-y: auto;
     opacity: 1;

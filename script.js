@@ -64,6 +64,9 @@ function go(id, anchor){
   
   // Close mobile menu if open
   document.getElementById('mob').classList.remove('on');
+  
+  // Close desktop dropdowns if open
+  document.querySelectorAll('.ni').forEach(ni => ni.classList.remove('open'));
 
   if(current && current !== target) {
     const overlay = document.getElementById('transition-overlay');
@@ -483,9 +486,69 @@ function initLivingMosaic() {
   }, 2500);
 }
 
-// Start living mosaic on load
+function initMegaMenuAccordions() {
+  document.querySelectorAll('.dd-col-title').forEach(title => {
+    title.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const parent = title.parentElement;
+      if (parent) {
+        parent.classList.toggle('open');
+      }
+    });
+  });
+}
+
+function initMegaMenuClicks() {
+  const navItems = document.querySelectorAll('.ni');
+  
+  navItems.forEach(ni => {
+    const btn = ni.querySelector('.nk');
+    const dd = ni.querySelector('.dd');
+    
+    // Only bind click logic if the nav item actually contains a dropdown
+    if (dd && btn) {
+      btn.addEventListener('click', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        
+        const isOpen = ni.classList.contains('open');
+        
+        // Close all other dropdowns
+        navItems.forEach(otherNi => {
+          if (otherNi !== ni) {
+            otherNi.classList.remove('open');
+          }
+        });
+        
+        // Toggle the clicked one
+        if (isOpen) {
+          ni.classList.remove('open');
+        } else {
+          ni.classList.add('open');
+        }
+      });
+    }
+  });
+
+  // Close dropdowns if clicking anywhere outside the navbar
+  document.addEventListener('click', (e) => {
+    if (!e.target.closest('#nav')) {
+      navItems.forEach(ni => {
+        ni.classList.remove('open');
+      });
+    }
+  });
+}
+
+// Start living mosaic, accordions and dropdown click logic on load
 if (document.readyState === 'loading') {
-  document.addEventListener('DOMContentLoaded', initLivingMosaic);
+  document.addEventListener('DOMContentLoaded', () => {
+    initLivingMosaic();
+    initMegaMenuAccordions();
+    initMegaMenuClicks();
+  });
 } else {
   initLivingMosaic();
+  initMegaMenuAccordions();
+  initMegaMenuClicks();
 }
