@@ -9,94 +9,193 @@
     href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&amp;family=Montserrat:wght@700;800;900&amp;display=swap"
     rel="stylesheet">
 
-  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="styles.css?v=207">
 </head>
 
 <body>
 
-  <!-- ════ NAVBAR ════ -->
+  <!-- ════ MAIN NAV BAR ════ -->
   <nav id="nav">
+    <!-- Logo -->
     <div class="nl" onclick="go('home')">
-      <img src="logo.svg" alt="FBTU Logo" class="nav-logo">
+      <img src="logo.svg" alt="FBTU Logo" class="nav-logo" style="height:40px;width:auto;display:block;">
     </div>
+
+    <!-- Nav Items -->
     <div class="nm">
-      <div class="ni"><button class="nk" onclick="go('home')">Inicio</button></div>
+
+      <!-- HOME -->
       <div class="ni">
-        <button class="nk">Sobre FBTU ▾</button>
-        <div class="dd">
-          <a onclick="go('sobre')">¿Quiénes somos?</a>
-          <a onclick="go('sobre','mision')">Misión y Visión</a>
-          <a onclick="go('sobre','equipo')">Equipo Directivo</a>
-          <div class="dds"></div>
-          <a onclick="go('sobre','licenc')" style="color:var(--red);font-weight:600">⚖ Licensing &amp; Info
-            Institucional</a>
-          <a onclick="go('sobre','catalogo')">Catálogo Oficial (PDF)</a>
-        </div>
+        <button class="nk" onclick="go('home')">Home</button>
       </div>
+
+      <!-- ABOUT FBTU -->
       <div class="ni">
-        <button class="nk">Pregrado ▾</button>
+        <button class="nk">About FBTU</button>
         <div class="dd">
-          <a onclick="go('pre')">Vista general</a>
-          <div class="dds"></div>
-          <a onclick="go('pre','bba')">B.S. Business Administration</a>
-          <a onclick="go('pre','mkt')">B.S. Marketing</a>
-          <a onclick="go('pre','it')">B.S. Information Technology</a>
-          <a onclick="go('pre','acct')">B.S. Accounting &amp; Finance</a>
-        </div>
-      </div>
-      <div class="ni">
-        <button class="nk">Posgrado / MBA ▾</button>
-        <div class="dd">
-          <a onclick="go('pos')">Vista general</a>
-          <div class="dds"></div>
-          <a onclick="go('pos','mba')">MBA — Master of Business Admin.</a>
-          <a onclick="go('pos','mktm')">Master of Marketing</a>
-          <a onclick="go('pos','edm')">Master of Higher Education</a>
-        </div>
-      </div>
-      <div class="ni">
-        <button class="nk">Académico ▾</button>
-        <div class="dd">
-          <a onclick="go('academics')">Modelo Académico</a>
-          <a onclick="go('academics', 'microcredentials')">Certificates &amp; Microcredentials</a>
-          <div class="dds"></div>
-          <a onclick="go('jobs')">FBTU Jobs / Career Outcomes</a>
+          <div class="dd-inner">
+            <div class="dd-img-panel">
+              <img src="img/campus_hero.png" alt="About FBTU">
+              <div class="dd-img-label">About FBTU</div>
+            </div>
+            <div class="dd-links-panel">
+              <div class="dd-section-title">About FBTU | Sobre FBTU</div>
+              <div class="dd-links-cols">
+                <div class="dd-col">
+                  <div class="dd-col-title">Institutional Profile</div>
+                  <a onclick="go('sobre')">About FBTU | Sobre FBTU</a>
+                  <a onclick="go('sobre','overview')">Institutional Overview | Perfil Institucional</a>
+                  <a onclick="go('sobre','mision')">Institutional Mission | Misión Institucional</a>
+                  <a onclick="go('sobre','statement')">Institutional Statement | Declaración Institucional</a>
+                  <a onclick="go('sobre','philosophy')">Academic Philosophy | Filosofía Académica</a>
+                </div>
+                <div class="dd-col">
+                  <div class="dd-col-title">Heritage & Compliance</div>
+                  <a onclick="go('sobre','legacy')">Institutional Legacy &amp; Academic Commitment</a>
+                  <a onclick="go('sobre','licenc')">Licensure &amp; Legal Standing — Florida, USA</a>
+                  <a onclick="go('sobre','home')">Our Home | Nuestra Sede</a>
+                  <a onclick="go('sobre','standard')">The FBTU Standard | El Estándar FBTU</a>
+                </div>
+              </div>
+              <div class="dd-info-for">
+                <span class="if-label">Information For</span>
+                <a onclick="go('adm')">Prospective Students</a>
+                <a onclick="go('vida')">Current Students</a>
+                <a onclick="go('contacto')">Faculty &amp; Staff</a>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
 
+      <!-- ACADEMIC PROGRAMS -->
       <div class="ni">
-        <button class="nk">Vida Estudiantil ▾</button>
+        <button class="nk">Academic Programs</button>
         <div class="dd">
-          <a onclick="go('vida')">Canvas LMS</a>
-          <a onclick="go('vida','biblio')">Biblioteca Aquinas</a>
-          <a onclick="go('vida','career')">Career Services</a>
-          <a onclick="go('vida','grad')">Graduación</a>
-          <a onclick="go('vida','pols')">Políticas Estudiantiles</a>
+          <div class="dd-inner">
+            <div class="dd-img-panel">
+              <img src="img/business_team.png" alt="Academic Programs">
+              <div class="dd-img-label">Academic Programs</div>
+            </div>
+            <div class="dd-links-panel">
+              <div class="dd-section-title">Academic Programs | Programas Académicos</div>
+              <div class="dd-links-cols">
+                <div class="dd-col">
+                  <div class="dd-col-title">Bachelor's Degrees | Licenciaturas</div>
+                  <a onclick="go('pre','bba')">Sch. Business Administration | Fac. Administración de Empresas</a>
+                  <a onclick="go('pre','mkt')">Sch. Marketing &amp; Digital Commerce | Fac. Marketing y Comercio Digital</a>
+                  <a onclick="go('pre','acct')">Sch. Accounting &amp; Finance | Fac. Contabilidad y Finanzas</a>
+                  <a onclick="go('pre','it')">Sch. Information Technologies | Fac. Tecnologías de Información</a>
+                </div>
+                <div class="dd-col">
+                  <div class="dd-col-title">Master's Degrees | Maestrías</div>
+                  <a onclick="go('pos','mba')">Sch. Business Administration | Fac. Administración de Empresas</a>
+                  <a onclick="go('pos','mktm')">Sch. Marketing | Fac. Marketing</a>
+                  <a onclick="go('pos','edm')">Sch. Higher Education | Fac. Educación Superior</a>
+                  <div class="dd-col-title" style="margin-top:14px">Specializations | Especializaciones</div>
+                  <a onclick="go('pre','spec1')">Specialization 1 | Especialización 1</a>
+                  <a onclick="go('pre','spec2')">Specialization 2 | Especialización 2</a>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
-      <div class="ni"><button class="nk" onclick="go('contacto')">Contacto</button></div>
-    </div>
+
+      <!-- EXPERIENCE FBTU -->
+      <div class="ni">
+        <button class="nk">Experience FBTU</button>
+        <div class="dd">
+          <div class="dd-inner">
+            <div class="dd-img-panel">
+              <img src="img/students_community.png" alt="Experience FBTU">
+              <div class="dd-img-label">Experience FBTU</div>
+            </div>
+            <div class="dd-links-panel">
+              <div class="dd-section-title">Experience FBTU</div>
+              <div class="dd-links-cols">
+                <div class="dd-col">
+                  <div class="dd-col-title">Student Life</div>
+                  <a onclick="go('vida')">Student Life | Vida Estudiantil</a>
+                  <a onclick="go('vida','resources')">Student Resources | Recursos Estudiantiles</a>
+                  <a onclick="go('vida','biblio')">Digital Library | Biblioteca Digital</a>
+                  <a onclick="go('vida','career')">Career Services | Servicios de Desarrollo Profesional</a>
+                </div>
+                <div class="dd-col">
+                  <div class="dd-col-title">Platform &amp; Future</div>
+                  <a onclick="go('vida','canvas')">Discover Canvas FBTU | Descubre Canvas FBTU</a>
+                  <a onclick="go('academics','future')">Academic Future | Futuro Académico</a>
+                  <a onclick="go('apply')">Start Your Future in FBTU | Inicia tu Futuro en FBTU</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ADMISSIONS -->
+      <div class="ni">
+        <button class="nk">Admissions</button>
+        <div class="dd">
+          <div class="dd-inner">
+            <div class="dd-img-panel">
+              <img src="img/quien_global.png" alt="Admissions">
+              <div class="dd-img-label">Admissions</div>
+            </div>
+            <div class="dd-links-panel">
+              <div class="dd-section-title">Admissions</div>
+              <div class="dd-links-cols">
+                <div class="dd-col">
+                  <div class="dd-col-title">Apply to FBTU</div>
+                  <a onclick="go('adm')">Admissions &amp; Aid | FBTU Admissions Home</a>
+                  <a onclick="go('adm','undergrad')">Undergraduate | Pregrado</a>
+                  <a onclick="go('adm','tuition')">Tuition &amp; Financial Aid | Matrícula y Ayuda Financiera</a>
+                </div>
+              </div>
+              <div class="dd-info-for">
+                <span class="if-label">Information For</span>
+                <a onclick="go('adm')">Applicants</a>
+                <a onclick="go('adm','international')">International Students</a>
+                <a onclick="go('contacto')">Families</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- TUITION & SCHOLARSHIPS -->
+      <div class="ni">
+        <button class="nk" onclick="go('adm','tuition')">Tuition &amp; Scholarships</button>
+      </div>
+
+      <!-- INTERNATIONAL STUDENTS -->
+      <div class="ni">
+        <button class="nk" onclick="go('adm','international')">International Students</button>
+      </div>
+
+    </div><!-- end .nm -->
+
+    <!-- Right nav actions -->
     <div class="nr">
-      <a class="np" href="#" onclick="alert('Portal Canvas LMS — integración pendiente')">🔒 Portal estudiante</a>
-      <button class="btn lg b-red" onclick="go('adm')">Solicitar admisión →</button>
+      <a class="np" href="#" onclick="alert('Portal Canvas LMS — integración pendiente')">&#128274; Portal</a>
+      <button class="btn lg b-red" onclick="go('adm')">Apply Now &rarr;</button>
     </div>
+
+    <!-- Hamburger -->
     <div class="hb" id="hb" onclick="toggleMob()"><span></span><span></span><span></span></div>
   </nav>
 
   <!-- MOBILE MENU -->
   <div class="mob" id="mob">
-    <a onclick="go('home');toggleMob()">Inicio</a>
-    <a onclick="go('sobre');toggleMob()">Sobre FBTU</a>
-    <a onclick="go('pre');toggleMob()">Pregrado</a>
-    <a onclick="go('pos');toggleMob()">Posgrado / MBA</a>
-    <a onclick="go('apply');toggleMob()">Apply Now →</a>
-
-    <a onclick="go('academics');toggleMob()">Modelo Académico</a>
-    <a onclick="go('jobs');toggleMob()">FBTU Jobs</a>
-    <a onclick="go('vida');toggleMob()">Vida Estudiantil</a>
-    <a onclick="go('contacto');toggleMob()">Contacto</a>
-    <a onclick="go('adm');toggleMob()"
-      style="background:var(--red);color:#fff;border-radius:4px;margin-top:7px">Solicitar admisión →</a>
+    <a onclick="go('home');toggleMob()">Home</a>
+    <a onclick="go('sobre');toggleMob()">About FBTU</a>
+    <a onclick="go('pre');toggleMob()">Bachelor's Degrees</a>
+    <a onclick="go('pos');toggleMob()">Master's Degrees</a>
+    <a onclick="go('vida');toggleMob()">Experience FBTU</a>
+    <a onclick="go('adm');toggleMob()">Admissions</a>
+    <a onclick="go('adm','tuition');toggleMob()">Tuition &amp; Scholarships</a>
+    <a onclick="go('adm','international');toggleMob()">International Students</a>
+    <a onclick="go('adm');toggleMob()" style="background:var(--red);color:#fff;border-radius:4px;margin-top:7px">Apply Now →</a>
   </div>
 
   <!-- ════════════════════════════════

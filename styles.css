@@ -17,7 +17,8 @@
   
   --H:                'Montserrat', sans-serif;
   --B:                'Inter', sans-serif;
-  --nh:               72px;
+  --nh:               64px;  /* nav bar height */
+  --nh-total:         64px;  /* single bar */
   --r:                10px; /* Radius standard premium */
   
   /* SOMBRAS SOFT */
@@ -57,29 +58,323 @@ h2.ttl.w em{color:rgba(255,255,255,.4)}
 .b-outn{background:transparent;color:var(--navy);border:1.5px solid var(--navy)}.b-outn:hover{background:var(--navy);color:#fff}
 .b-wht{background:#fff;color:var(--red);box-shadow:0 4px 16px rgba(0,0,0,.15)}.b-wht:hover{transform:translateY(-2px);box-shadow:0 8px 28px rgba(0,0,0,.2)}
 
-/* ── NAVBAR ─── */
-#nav{position:fixed;top:0;left:0;right:0;z-index:999;height:var(--nh);background:var(--navy);display:flex;align-items:center;gap:20px;padding:0 36px;transition:background .3s,box-shadow .3s}
-#nav.sc{background:rgba(19,22,80,.97);box-shadow:0 2px 32px rgba(0,0,0,.3)}
-.nl{display:flex;align-items:center;gap:11px;flex-shrink:0;cursor:pointer}
-.ns{width:44px;height:44px;border-radius:50%;border:1.5px solid rgba(255,255,255,.28);background:rgba(255,255,255,.07);display:flex;align-items:center;justify-content:center;font-family:var(--H);font-size:11px;font-weight:900;color:#fff;letter-spacing:.5px}
-.nn{font-family:var(--H);font-size:12.5px;font-weight:700;line-height:1.2}
-.nn .a{color:#fff}.nn .b{color:var(--red)}
-.nm{display:flex;align-items:center;gap:2px;flex:1;justify-content:center}
-.ni{position:relative}
-.nk{font-family:var(--B);font-size:13px;font-weight:500;color:rgba(255,255,255,.75);padding:6px 11px;border-radius:4px;transition:all .2s;white-space:nowrap;background:none;border:none;display:block}
-.nk:hover,.nk.on{color:#fff;background:rgba(255,255,255,.1)}
-.dd{position:absolute;top:100%;left:50%;transform:translateX(-50%);background:#fff;border-radius:var(--r);box-shadow:0 12px 44px rgba(0,0,0,.16);min-width:220px;padding:7px;display:none;z-index:10}
-.dd::before{content:'';position:absolute;top:-15px;left:0;right:0;height:15px;background:transparent}
-.ni:hover .dd{display:block}
-.dd a{display:block;font-size:13px;color:var(--t);padding:9px 13px;border-radius:4px;transition:background .15s;white-space:nowrap}
-.dd a:hover{background:var(--navy-lt);color:var(--navy)}
-.dds{height:1px;background:var(--bd);margin:5px 3px}
-.nr{display:flex;align-items:center;gap:10px;flex-shrink:0}
-.np{font-family:var(--B);font-size:13px;font-weight:500;color:rgba(255,255,255,.7);border:1px solid rgba(255,255,255,.22);padding:7px 13px;border-radius:4px;transition:all .2s}.np:hover{color:#fff;border-color:rgba(255,255,255,.6)}
-.hb{display:none;flex-direction:column;gap:5px;padding:6px}.hb span{display:block;width:22px;height:2px;background:#fff;border-radius:2px}
-.mob{display:none;position:fixed;top:var(--nh);left:0;right:0;background:var(--navy2);z-index:998;padding:18px;flex-direction:column;gap:3px}
-.mob.on{display:flex}
-.mob a{color:#fff;font-size:15px;padding:11px 14px;border-radius:4px;font-weight:500}.mob a:hover{background:rgba(255,255,255,.1)}
+/* ═══════════════════════════════════════════
+   STANFORD-STYLE MEGA MENU NAV
+═══════════════════════════════════════════ */
+
+/* ── MAIN NAV BAR (white bar with crimson right zone) ── */
+#nav {
+  position: fixed;
+  top: 0;
+  left: 0; right: 0;
+  z-index: 1000;
+  height: var(--nh);
+  background: #fff;
+  border-bottom: 1px solid rgba(0,0,0,.10);
+  display: flex;
+  align-items: center;
+  padding: 0 36px;
+  transition: box-shadow .3s;
+}
+#nav.sc { box-shadow: 0 2px 20px rgba(0,0,0,.12); }
+
+/* Logo area */
+.nl {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  flex-shrink: 0;
+  cursor: pointer;
+  margin-right: 32px;
+}
+.nav-logo { height: 38px; width: auto; }
+.nn { font-family: var(--H); font-size: 13px; font-weight: 800; line-height: 1.2; }
+.nn .a { color: var(--navy); }
+.nn .b { color: var(--red); }
+.ns { display: none; }
+
+/* Center nav items */
+.nm {
+  display: flex;
+  align-items: stretch;
+  gap: 0;
+  flex: 1;
+  height: 100%;
+}
+
+/* Individual nav item */
+.ni {
+  position: static;
+  display: flex;
+  align-items: stretch;
+}
+
+/* Nav button */
+.nk {
+  font-family: var(--B);
+  font-size: 13.5px;
+  font-weight: 500;
+  color: var(--t);
+  padding: 0 16px;
+  border-radius: 0;
+  transition: color .2s;
+  white-space: nowrap;
+  background: none;
+  border: none;
+  border-bottom: 3px solid transparent;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  position: relative;
+}
+.nk:hover,
+.nk.on,
+.ni:hover .nk {
+  color: var(--red);
+  border-bottom-color: var(--red);
+}
+
+/* ── RIGHT NAV ACTIONS (white zone) ── */
+.nr {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-shrink: 0;
+  margin-left: auto;
+  padding-left: 16px;
+}
+
+/* Portal link */
+.np {
+  font-family: var(--B);
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--tm);
+  border: 1px solid var(--bd);
+  padding: 7px 14px;
+  border-radius: 5px;
+  transition: all .2s;
+  background: transparent;
+}
+.np:hover { color: var(--navy); border-color: var(--navy); background: var(--g); }
+
+/* ══ MEGA DROPDOWN ══ smooth slide-in + logo watermark ══ */
+.dd {
+  position: fixed;
+  top: var(--nh-total);
+  left: 0;
+  right: 0;
+  background: var(--red2);
+  box-shadow: 0 8px 32px rgba(0,0,0,.25);
+  z-index: 999;
+  padding: 0;
+  /* Smooth animation: hidden state */
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-8px);
+  transition:
+    opacity 0.28s cubic-bezier(0.25,0.8,0.25,1),
+    transform 0.28s cubic-bezier(0.25,0.8,0.25,1),
+    visibility 0.28s;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+/* Logo watermark in the right empty space of the dropdown (aligned to content width) */
+.dd-inner::after {
+  content: '';
+  position: absolute;
+  right: -60px; /* offset to overflow off the right side */
+  top: 50%;
+  transform: translateY(-50%) scale(1.85); /* 85% scale increase, occupying more than the full height */
+  width: 240px;
+  height: 240px;
+  background-image: url('isot.svg');
+  background-repeat: no-repeat;
+  background-position: right center;
+  background-size: contain;
+  opacity: 0.08; /* subtle watermark opacity */
+  filter: brightness(0) invert(1);
+  pointer-events: none;
+  z-index: 0;
+}
+.dd::before { display: none; }
+
+/* Visible state on hover */
+.ni:hover .dd {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+/* Inner layout of mega menu */
+.dd-inner {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 60px;
+  display: flex;
+  gap: 0;
+  min-height: 240px;
+  position: relative; /* containing block for watermark logo */
+}
+
+/* Left image panel */
+.dd-img-panel {
+  width: 300px;
+  flex-shrink: 0;
+  overflow: hidden;
+  position: relative;
+}
+.dd-img-panel img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.6;
+}
+.dd-img-panel .dd-img-label {
+  position: absolute;
+  bottom: 24px;
+  left: 24px;
+  font-family: var(--H);
+  font-size: 22px;
+  font-weight: 900;
+  color: #fff;
+  line-height: 1.2;
+}
+
+/* Right links panel */
+.dd-links-panel {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 32px 0 32px 48px;
+}
+.dd-section-title {
+  font-family: var(--H);
+  font-size: 20px;
+  font-weight: 900;
+  color: #fff;
+  margin-bottom: 20px;
+  letter-spacing: -.01em;
+}
+.dd-links-cols {
+  display: flex;
+  gap: 48px;
+  flex-wrap: wrap;
+}
+.dd-col {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 180px;
+}
+.dd-col-title {
+  font-family: var(--H);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,.45);
+  margin-bottom: 8px;
+  padding-bottom: 6px;
+  border-bottom: 1px solid rgba(255,255,255,.15);
+}
+.dd a {
+  display: block;
+  font-family: var(--B);
+  font-size: 14px;
+  font-weight: 400;
+  color: rgba(255,255,255,.88);
+  padding: 7px 0;
+  border-radius: 0;
+  transition: color .15s, padding-left .2s cubic-bezier(0.25,0.8,0.25,1);
+  white-space: nowrap;
+  border-bottom: none;
+  background: none;
+}
+.dd a:hover {
+  color: #fff;
+  padding-left: 8px;
+  background: none;
+}
+
+/* Info-for strip at bottom of mega */
+.dd-info-for {
+  border-top: 1px solid rgba(255,255,255,.15);
+  padding: 16px 0 0 0;
+  margin-top: 20px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+.dd-info-for .if-label {
+  font-family: var(--H);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,.45);
+}
+.dd-info-for a {
+  font-family: var(--B);
+  font-size: 12.5px;
+  font-weight: 600;
+  color: rgba(255,255,255,.75) !important;
+  padding: 4px 10px !important;
+  border: 1px solid rgba(255,255,255,.25) !important;
+  border-radius: 3px;
+  transition: all .2s !important;
+  white-space: nowrap;
+}
+.dd-info-for a:hover {
+  color: #fff !important;
+  border-color: rgba(255,255,255,.6) !important;
+  padding-left: 10px !important;
+  background: rgba(255,255,255,.1) !important;
+}
+
+/* Separator within dropdown — hidden */
+.dds { display: none; }
+
+/* Hamburger (mobile) */
+.hb {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  padding: 6px;
+  cursor: pointer;
+  position: relative;
+  z-index: 1;
+}
+.hb span { display: block; width: 22px; height: 2px; background: var(--t); border-radius: 2px; }
+
+/* Mobile menu */
+.mob {
+  display: none;
+  position: fixed;
+  top: var(--nh-total);
+  left: 0; right: 0;
+  background: var(--navy2);
+  z-index: 998;
+  padding: 18px;
+  flex-direction: column;
+  gap: 3px;
+}
+.mob.on { display: flex; }
+.mob a {
+  color: #fff;
+  font-size: 15px;
+  padding: 11px 14px;
+  border-radius: 4px;
+  font-weight: 500;
+}
+.mob a:hover { background: rgba(255,255,255,.1); }
+
+/* Body padding: single nav bar */
+body { padding-top: var(--nh-total); }
+.hero-premium { margin-top: 0; }
 
 /* ── HERO ─── */
 .hero {
@@ -1339,7 +1634,7 @@ footer{background:var(--navy2);padding:56px 60px 0}
   height: 40px;
   width: auto;
   display: block;
-  filter: brightness(0) invert(1);
+  /* Removed white filter so original navy/red logo shows on white header */
 }
 
 .footer-logo {
@@ -2807,4 +3102,47 @@ footer{background:var(--navy2);padding:56px 60px 0}
   .im-item-sm {
     height: 95px;
   }
+}
+
+/* ═══════════════════════════════════════════
+   STANFORD NAV — RESPONSIVE
+═══════════════════════════════════════════ */
+
+/* Large screens: limit nav text size so all items fit */
+@media (max-width: 1200px) {
+  .nk { font-size: 12.5px; padding: 0 11px; }
+  .dd-img-panel { width: 220px; }
+}
+
+/* Tablet/Mobile: collapse to hamburger */
+@media (max-width: 900px) {
+  /* Hide desktop nav links */
+  .nm { display: none; }
+  .nr { display: none; }
+
+  /* Show hamburger — styled for white nav bar */
+  .hb { display: flex; }
+  .hb span { background: var(--t); }
+  #nav { padding: 0 18px; }
+
+  /* Mega menu on mobile: fallback to full screen scroll */
+  .dd {
+    position: fixed;
+    top: var(--nh-total);
+    left: 0; right: 0; bottom: 0;
+    overflow-y: auto;
+    opacity: 1;
+    visibility: visible;
+    transform: none;
+    pointer-events: auto;
+  }
+  .ni:hover .dd { display: block; opacity: 1; }
+  .dd-inner { flex-direction: column; min-height: auto; padding: 0 24px; }
+  .dd-img-panel { width: 100%; height: 140px; }
+  .dd-links-panel { padding: 24px 0; }
+  .dd-links-cols { flex-direction: column; gap: 16px; }
+}
+
+@media (max-width: 600px) {
+  .nav-logo { height: 30px; }
 }
