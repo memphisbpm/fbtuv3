@@ -192,7 +192,7 @@ h2.ttl.w em{color:rgba(255,255,255,.4)}
   flex-shrink: 0;
   margin-left: auto;
   padding-left: 16px;
-  margin-right: 56px; /* leave space for the USA flag ribbon */
+  margin-right: 170px; /* leave ample space for the USA flag ribbon at the edge */
 }
 
 /* Portal link */
@@ -212,7 +212,7 @@ h2.ttl.w em{color:rgba(255,255,255,.4)}
 /* USA Flag Ribbon style */
 .nav-flag {
   position: absolute;
-  right: 28px;
+  right: 0; /* pinned exactly to the right screen edge */
   top: 0; /* aligned with the top of the main white navbar */
   height: 78px; /* hangs slightly below navbar */
   width: auto;
